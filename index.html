@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alifer Rabelo - Portfólio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    :root {
+      --orange: #FF5C00;
+      --orange-light: #FF8C42;
+      --orange-pale: #FFF2EA;
+      --black: #0F0F0F;
+      --gray-dark: #1A1A1A;
+      --gray-mid: #555;
+      --gray-light: #999;
+      --border: #EBEBEB;
+      --white: #FFFFFF;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.6;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+      height: 64px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo { font-weight: 700; font-size: 1.1rem; color: var(--black); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--gray-mid); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--orange); }
+
+    .hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--black); font-size: 1.3rem; }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      z-index: 99;
+      padding: 0.5rem 6%;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 1rem; font-weight: 500; color: var(--gray-mid); text-decoration: none; padding: 0.9rem 0; border-bottom: 1px solid var(--border); }
+
+    /* SECTIONS - AJUSTE DE ESPAÇAMENTO */
+    section { padding: 60px 6%; } /* Reduzido de 88px para 60px */
+
+    .section-label { font-size: 0.73rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.5rem; }
+    .section-title { font-weight: 800; font-size: clamp(1.7rem, 3vw, 2.4rem); letter-spacing: -0.02em; color: var(--black); margin-bottom: 0.8rem; line-height: 1.15; }
+    .section-desc { color: var(--gray-mid); font-weight: 400; max-width: 520px; margin-bottom: 2.2rem; font-size: 1rem; }
+
+    /* HERO - AJUSTE PARA MATAR O VAZIO */
+    #hero {
+      min-height: 70vh; /* Reduzido para não forçar a tela inteira se não houver conteúdo */
+      display: flex;
+      align-items: center;
+      padding: 120px 6% 60px; /* Mais respiro no topo para a Nav e menos embaixo */
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: -160px; right: -160px;
+      width: 560px; height: 560px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #FFF2EA 0%, rgba(255,242,234,0) 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner { max-width: 820px; position: relative; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--orange-pale); color: var(--orange); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; padding: 0.4em 1em; border-radius: 999px; margin-bottom: 1.5rem; }
+    .hero-tag::before { content: ''; width: 7px; height: 7px; background: var(--orange); border-radius: 50%; }
+    .hero-title { font-weight: 800; font-size: clamp(3rem, 7vw, 5.5rem); line-height: 1.02; letter-spacing: -0.04em; color: var(--black); margin-bottom: 1.2rem; }
+    .hero-desc { font-size: 1.1rem; font-weight: 400; color: var(--gray-mid); max-width: 620px; margin-bottom: 2.5rem; line-height: 1.7; }
+
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8em 1.6em; border-radius: 8px; font-family: 'Outfit', sans-serif; font-size: 0.92rem; font-weight: 600; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
+    .btn-primary { background: var(--orange); color: #fff; }
+    .btn-primary:hover { background: var(--orange-light); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,92,0,0.22); }
+    .btn-outline { background: transparent; color: var(--black); border: 1.5px solid var(--border); }
+    .btn-outline:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+
+    /* SOBRE */
+    #sobre { background: var(--white); border-top: 1px solid var(--border); }
+    .sobre-grid { display: grid; grid-template-columns: 260px 1fr; gap: 4.5rem; align-items: center; }
+    .sobre-img-wrap { position: relative; }
+    .sobre-img-wrap::before { content: ''; position: absolute; inset: -10px; border: 2px solid var(--orange-pale); border-radius: 18px; transform: rotate(-2deg); }
+    .sobre-img-wrap img { width: 100%; border-radius: 14px; display: block; position: relative; z-index: 1; object-fit: cover; aspect-ratio: 4/5; background: var(--orange-pale); }
+    .sobre-text p { color: var(--gray-mid); font-weight: 400; margin-bottom: 1rem; font-size: 1rem; }
+    .sobre-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+    .chip { font-size: 0.82rem; font-weight: 600; padding: 0.32em 0.9em; border-radius: 999px; background: var(--orange-pale); color: var(--orange); border: 1px solid rgba(255,92,0,0.12); }
+
+    /* EXPERIENCIA */
+    #experiencia { background: var(--black); }
+    #experiencia .section-title { color: var(--white); }
+    #experiencia .section-desc { color: #777; }
+    .exp-card { background: var(--gray-dark); border: 1px solid #252525; border-radius: 14px; padding: 2.2rem; max-width: 700px; }
+    .exp-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.4rem; }
+    .exp-role { font-weight: 700; font-size: 1.18rem; color: var(--white); }
+    .exp-type { font-size: 0.78rem; font-weight: 700; color: var(--orange); background: rgba(255,92,0,0.1); padding: 0.3em 0.9em; border-radius: 999px; border: 1px solid rgba(255,92,0,0.18); white-space: nowrap; }
+    .exp-company { font-size: 0.88rem; color: #666; margin-bottom: 1.2rem; }
+    .exp-desc { color: #888; font-weight: 400; font-size: 0.96rem; line-height: 1.8; }
+
+    /* PROJETOS */
+    #projetos { background: var(--white); border-top: 1px solid var(--border); }
+    .proj-card { border: 1.5px solid var(--border); border-radius: 14px; padding: 2.2rem; max-width: 620px; position: relative; overflow: hidden; }
+    .proj-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--orange); }
+    .proj-icon { width: 48px; height: 48px; border-radius: 10px; background: var(--orange-pale); display: flex; align-items: center; justify-content: center; color: var(--orange); font-size: 1.2rem; margin-bottom: 1.3rem; }
+    .proj-title { font-weight: 700; font-size: 1.12rem; color: var(--black); margin-bottom: 0.5rem; }
+    .proj-desc { color: var(--gray-mid); font-weight: 400; font-size: 0.96rem; line-height: 1.8; }
+    .proj-badge { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1.3rem; font-size: 0.8rem; font-weight: 600; color: var(--gray-light); }
+    .proj-badge::before { content: ''; width: 6px; height: 6px; background: #f0a000; border-radius: 50%; animation: pulse 1.8s infinite; }
+
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    /* HABILIDADES */
+    #habilidades { background: var(--orange-pale); }
+    .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; max-width: 840px; }
+    .skill-card { background: var(--white); border-radius: 12px; padding: 1.8rem; border: 1px solid rgba(255,92,0,0.08); transition: transform 0.2s, box-shadow 0.2s; }
+    .skill-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(255,92,0,0.09); }
+    .skill-icon { width: 42px; height: 42px; border-radius: 9px; background: var(--orange-pale); display: flex; align-items: center; justify-content: center; color: var(--orange); font-size: 1.1rem; margin-bottom: 1rem; }
+    .skill-name { font-weight: 700; font-size: 0.97rem; color: var(--black); margin-bottom: 0.75rem; }
+    .skill-items { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+    .skill-items li { font-size: 0.88rem; font-weight: 400; color: var(--gray-mid); padding-left: 1rem; position: relative; line-height: 1.5; }
+    .skill-items li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 5px; height: 5px; border-radius: 50%; background: var(--orange); }
+
+    /* CONTATO */
+    #contato { background: var(--white); border-top: 1px solid var(--border); }
+    .contato-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; max-width: 820px; }
+    .contato-item { display: flex; flex-direction: column; gap: 0.5rem; }
+    .contato-item-label { font-size: 0.73rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-light); }
+    .contato-item a { font-size: 0.97rem; font-weight: 500; color: var(--black); text-decoration: none; transition: color 0.2s; }
+    .contato-item a:hover { color: var(--orange); }
+    .social-row { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 0.2rem; }
+    .social-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.55em 1.1em; border-radius: 7px; border: 1.5px solid var(--border); font-size: 0.86rem; font-weight: 600; color: var(--black); text-decoration: none; transition: all 0.2s; font-family: 'Outfit', sans-serif; }
+    .social-btn:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+
+    footer { background: var(--black); color: #555; text-align: center; padding: 1.8rem 6%; font-size: 0.85rem; }
+
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      section { padding: 50px 5%; }
+      #hero { padding: 100px 5% 40px; min-height: auto; }
+      .hero-title { font-size: 2.8rem; }
+      .sobre-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .sobre-img-wrap { max-width: 220px; }
+      .contato-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#hero" class="nav-logo">Alifer Rabelo</a>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#experiencia">Experiência</a></li>
+      <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#sobre" onclick="closeMobile()">Sobre</a>
+    <a href="#experiencia" onclick="closeMobile()">Experiência</a>
+    <a href="#projetos" onclick="closeMobile()">Projetos</a>
+    <a href="#habilidades" onclick="closeMobile()">Habilidades</a>
+    <a href="#contato" onclick="closeMobile()">Contato</a>
+  </div>
+
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <div class="hero-tag">Ciência de Dados</div>
+      <h1 class="hero-title">Alifer Rabelo</h1>
+      <p class="hero-desc">
+        Bem-vindo ao meu portfólio. Aqui você encontra meus projetos em Ciência de Dados, minhas principais habilidades e experiências profissionais, mostrando na prática como utilizo dados para resolver problemas e gerar insights.
+      </p>
+      <div class="hero-cta">
+        <a href="#projetos" class="btn btn-primary"><i class="fa-solid fa-chart-bar"></i> Ver Projetos</a>
+        <a href="#contato" class="btn btn-outline"><i class="fa-solid fa-envelope"></i> Contato</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre">
+    <div class="fade-in">
+      <p class="section-label">Quem sou eu</p>
+      <h2 class="section-title">Sobre Mim</h2>
+    </div>
+    <div class="sobre-grid fade-in">
+      <div class="sobre-img-wrap">
+        <img src="images/pic01.jpg" alt="Alifer Rabelo" />
+      </div>
+      <div class="sobre-text">
+        <p>Meu nome é <strong>Alifer Rabelo</strong> e sou estudante de Análise e Desenvolvimento de Sistemas. Atualmente, atuo como Jovem Aprendiz na área de Suporte de TI, trabalhando com suporte técnico e resolução de problemas no dia a dia.</p>
+        <p>Paralelamente, desenvolvo projetos pessoais em Ciência de Dados para ganhar experiência prática, focado principalmente em análise, manipulação e interpretação de dados.</p>
+        <p>Busco uma oportunidade na área de dados para continuar evoluindo e aplicar meus conhecimentos em um ambiente profissional de alto impacto.</p>
+        <div class="sobre-chips">
+          <span class="chip">Python</span>
+          <span class="chip">SQL</span>
+          <span class="chip">Análise de Dados</span>
+          <span class="chip">Machine Learning</span>
+          <span class="chip">Visualização de Dados</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experiencia">
+    <div class="fade-in">
+      <p class="section-label" style="color: var(--orange);">Trajetória</p>
+      <h2 class="section-title">Experiência Profissional</h2>
+      <p class="section-desc">Minha jornada combina suporte técnico especializado com o estudo contínuo de inteligência de dados.</p>
+    </div>
+    <div class="exp-card fade-in">
+      <div class="exp-header">
+        <span class="exp-role">Suporte de TI</span>
+        <span class="exp-type">Jovem Aprendiz</span>
+      </div>
+      <p class="exp-company"><i class="fa-solid fa-building"></i>&nbsp; Empresa de Engenharia</p>
+      <p class="exp-desc">
+        Atuação no suporte técnico aos usuários, auxiliando na resolução de problemas de hardware, software e sistemas internos. Responsável pelo gerenciamento de chamados e apoio operacional à infraestrutura tecnológica da organização.
+      </p>
+    </div>
+  </section>
+
+  <section id="projetos">
+    <div class="fade-in">
+      <p class="section-label">Portfólio</p>
+      <h2 class="section-title">Projetos em Ciência de Dados</h2>
+      <p class="section-desc">Projetos focados em análise estatística e modelagem. Repositórios serão atualizados em breve.</p>
+    </div>
+    <div class="proj-card fade-in">
+      <div class="proj-icon"><i class="fa-solid fa-chart-bar"></i></div>
+      <p class="proj-title">Em desenvolvimento</p>
+      <p class="proj-desc">
+        Desenvolvendo soluções práticas com Python, Pandas e Scikit-Learn para análise de dados e automação de insights.
+      </p>
+      <span class="proj-badge">Em andamento</span>
+    </div>
+  </section>
+
+  <section id="habilidades">
+    <div class="fade-in">
+      <p class="section-label">Competências</p>
+      <h2 class="section-title">Habilidades</h2>
+    </div>
+    <div class="skills-grid fade-in">
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fa-solid fa-code"></i></div>
+        <p class="skill-name">Linguagens de Programação</p>
+        <ul class="skill-items">
+          <li>Python (Análise de Dados)</li>
+          <li>SQL</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fa-solid fa-brain"></i></div>
+        <p class="skill-name">Estatística e Machine Learning</p>
+        <ul class="skill-items">
+          <li>Modelagem e análise exploratória</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <p class="skill-name">Visualização de Dados</p>
+        <ul class="skill-items">
+          <li>Insights via Matplotlib e Seaborn</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fa-solid fa-desktop"></i></div>
+        <p class="skill-name">Engenharia de Software</p>
+        <ul class="skill-items">
+          <li>Fundamentos de ADS</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="fade-in">
+      <p class="section-label">Fale comigo</p>
+      <h2 class="section-title">Contato</h2>
+    </div>
+    <div class="contato-grid fade-in">
+      <div class="contato-item">
+        <span class="contato-item-label">E-mail</span>
+        <a href="mailto:contatoaliferoliveira@gmail.com">contatoaliferoliveira@gmail.com</a>
+      </div>
+      <div class="contato-item">
+        <span class="contato-item-label">Redes Sociais</span>
+        <div class="social-row">
+          <a href="https://github.com/aliferoliveira" class="social-btn" target="_blank">
+            <i class="fa-brands fa-github"></i> GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/alifer-rabelo" class="social-btn" target="_blank">
+            <i class="fa-brands fa-linkedin-in"></i> LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Alifer Rabelo. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    function closeMobile() { mobileMenu.classList.remove('open'); }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(f => observer.observe(f));
+  </script>
+
+</body>
+</html>
